@@ -1,4 +1,4 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:7241/api/v1/';
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://localhost:7241/api/v1/';
 export default class ApiUrl {
   public static Login : string = BASE_URL +  "Authenticate/login";
   public static ReLogin : string = BASE_URL +  "Authenticate/relogin";
