@@ -9,7 +9,7 @@ import { adm_userDTO, adm_userFilter } from '@/dtos/am_userDTO';
 import { PagingInfo } from '@/dtos/BaseDTO';
 import adm_user from '@/entities/adm_user';
 import { useHandleError } from '@/hooks/useHandleError';
-import { useUIManage } from '@/hooks/useUIManage';
+import { useLoading } from '@/hooks/useUIManage';
 import { ApiService } from '@/utils/api-service';
 import React, { useEffect, useState } from 'react';
 
@@ -17,7 +17,7 @@ export default function EmployeeList() {
   const [users, setUsers] = useState<adm_user[]>([]);
   const [filter, setFilter] = useState<adm_userFilter>({});
   const [pagingInfo, setPagingInfo] = useState<PagingInfo>(new PagingInfo());
-  const { isLoading, showLoading, hideLoading } = useUIManage();
+  const { isLoading, showLoading, hideLoading } = useLoading();
   const handleError = useHandleError();
 
   async function getUsers(pagingInfo?: PagingInfo) {

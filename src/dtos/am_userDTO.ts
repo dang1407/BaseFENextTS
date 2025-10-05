@@ -9,6 +9,8 @@ class adm_userDTO extends BaseDTO {
   public adm_users?: Array<adm_user>;
 
   public Filter?: adm_userFilter;
+
+  public user_id?: number;
 }
 
 class adm_userFilter {

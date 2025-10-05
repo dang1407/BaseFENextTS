@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function useUIManage() {
+export function useLoading() {
   const [isLoading, setIsLoading] = React.useState<Boolean>(false);
   const showLoading = () => setIsLoading(true);
   const hideLoading = () => setIsLoading(false);

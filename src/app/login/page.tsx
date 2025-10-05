@@ -39,7 +39,7 @@ export default function LoginForm() {
         loginData
       );
       localStorage.setItem(ApiService.AccessTokenKey, response.AccessToken);
-      router.push("/admin");
+      router.push("/");
     } catch (error: any) {
       handleError(error);
     }
