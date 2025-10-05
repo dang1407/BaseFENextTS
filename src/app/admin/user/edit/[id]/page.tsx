@@ -58,7 +58,7 @@ export default function CreateUser() {
   return (
     <div className="">
       <PageTitle title='Chỉnh sửa người dùng'/>
-      <form>
+      <div>
         <div className="grid grid-cols-4 gap-4">
           <div className="flex flex-col space-y-1.5">
             <Input required title='Họ và tên' value={user.name} id="name" placeholder="Name" onChange={(e) => setUser((prevUser) => ({ ...prevUser, name: e.target.value }))} />
@@ -82,8 +82,14 @@ export default function CreateUser() {
             <Input title='Số điện thoại' value={user.phone} id="phone" placeholder="Phone" onChange={(e) => setUser((prevUser) => ({ ...prevUser, phone: e.target.value }))} />
           </div>
         </div>
-      </form>
-      <Button className='mt-4' onClick={() => editUser()} >Lưu</Button>
+      </div>
+      <div className='flex justify-end mt-4'>
+        <div className="flex gap-4">
+          <Button onClick={() => editUser()} >Lưu</Button>
+          <Button onClick={() => router.push(`/admin/user`)}>Thoát</Button>
+        </div>
+      </div>
+
     </div>
   );
 }

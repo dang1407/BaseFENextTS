@@ -13,6 +13,7 @@ import { useLoading } from '@/hooks/useUIManage';
 import { ApiService } from '@/utils/api-service';
 import React, { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+import Link from 'next/link';
 export default function EmployeeList() {
   const [users, setUsers] = useState<adm_user[]>([]);
   const [filter, setFilter] = useState<adm_userFilter>({});
@@ -82,6 +83,7 @@ export default function EmployeeList() {
                 <TableHead className='w-[40px] text-center'>STT</TableHead>
                 <TableHead>Họ và tên</TableHead>
                 <TableHead>Code</TableHead>
+                <TableHead>Username</TableHead>
                 <TableHead>Email</TableHead>
                 <TableHead>SĐT</TableHead>
                 <TableHead>Giới tính</TableHead>
@@ -96,10 +98,10 @@ export default function EmployeeList() {
                   <TableRow key={user.user_id}>
                     <TableCell>{index + 1}</TableCell>
                     <TableCell>
-                      <Button onClick={() => router.push(`/admin/user/display/${user.user_id}`)}>{user.name}</Button>
-                      
+                      <Link href={`/admin/user/display/${user.user_id}`} className="text-blue-500 hover:text-blue-800">{user.name}</Link>
                     </TableCell>
                     <TableCell>{user.code}</TableCell>
+                    <TableCell>{user.username}</TableCell>
                     <TableCell>{user.email}</TableCell>
                     <TableCell>{user.phone}</TableCell>
                     <TableCell>{user.gender}</TableCell>

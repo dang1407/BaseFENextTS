@@ -60,6 +60,7 @@ export default function LoginForm() {
                   autoComplete="username"
                   id="username"
                   placeholder="Username"
+                  value={loginData.UserName}
                   onChange={(e: any) =>
                     setLoginData({
                       ...loginData,

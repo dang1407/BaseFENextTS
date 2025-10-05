@@ -72,7 +72,12 @@ export default function Display() {
             <Input value={user.phone} readOnly title='Số điện thoại' id="phone" placeholder="Phone"  />
           </div>
         </div>
-        <Button onClick={() => router.push(`/admin/user/edit/${user.user_id}`)}>Sửa</Button>
+          <div className='flex justify-end mt-4'>
+            <div className="flex gap-4">
+              <Button onClick={() => router.push(`/admin/user/edit/${user.user_id}`)}>Sửa</Button>
+              <Button onClick={() => router.push(`/admin/user`)}>Thoát</Button>
+            </div>
+          </div>
       </div>
     </div>
     : <div>Loading</div>
