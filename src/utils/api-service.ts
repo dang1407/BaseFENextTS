@@ -62,7 +62,12 @@ export class ApiService {
     actionCode: string,
     data: any
   ): Promise<T> {
-    let encryptedData : string = data; 
+    let encryptedData : string;
+    if(typeof(data) === "string"){
+      encryptedData = data
+    } else {
+      encryptedData = JSON.stringify(data);
+    }
     const encryptKeyDataRes : AxiosResponse<AdmClientAuthenticate> = 
     await  axios.post(ApiUrl.GetEncryptData, {
       Url: url.replace(BASE_URL, ""),

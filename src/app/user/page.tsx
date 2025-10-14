@@ -29,7 +29,7 @@ export default function EmployeeList() {
       const res = await ApiService.post<adm_userDTO>(
         ApiUrl.User,
         ApiActionCode.SearchData,
-        JSON.stringify(request)
+        request
       );
       setUsers(res.adm_users ?? []);
     } catch (error: any) {
