@@ -28,6 +28,7 @@ export default function EmployeeList() {
       const request = new adm_userDTO();
       request.Filter = filter;
       request.PagingInfo = pagingInfo ?? new PagingInfo();
+      request.PagingInfo.PageSize=100;
       const res = await ApiService.post<adm_userDTO>(
         ApiUrl.User,
         ApiActionCode.SearchData,
@@ -63,6 +64,7 @@ export default function EmployeeList() {
             <div>
               <Input
                 title='Tên người dùng' 
+                value={filter.name}
                 onChange={(e) => {
                 const tempFilter = { ...filter };
                 tempFilter.name = e.target.value;

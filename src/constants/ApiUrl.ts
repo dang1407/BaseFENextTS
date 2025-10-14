@@ -1,8 +1,10 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://localhost:7241/api/v1/';
+export const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://localhost:7241/api/v1/';
 export default class ApiUrl {
+  public static GetEncryptData : string = BASE_URL + "Authenticate/GetEncryptData";
   public static Login : string = BASE_URL +  "Authenticate/login";
-  public static ReLogin : string = BASE_URL +  "Authenticate/relogin";
+  public static ReLogin : string = BASE_URL +  "Authenticate/refresh-token";
   public static SignUp : string = BASE_URL +  "Authenticate/sign-up";
   public static User : string = BASE_URL +  "User";
+  public static UserTest : string = BASE_URL +  "User/Test";
   public static GetUserMenu : string = BASE_URL + "UI/UserMenu";
 }
