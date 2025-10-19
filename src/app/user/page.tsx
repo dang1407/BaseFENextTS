@@ -5,11 +5,11 @@ import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import ApiUrl from '@/constants/ApiUrl';
 import { ApiActionCode } from '@/constants/SharedResources';
-import { adm_userDTO, adm_userFilter } from '@/dtos/am_userDTO';
+import { adm_userDTO, adm_userFilter } from '@/dtos/adminitrations/am_userDTO';
 import { PagingInfo } from '@/dtos/BaseDTO';
-import adm_user from '@/entities/adm_user';
+import adm_user from '@/entities/admin/adm_user';
 import { useHandleError } from '@/hooks/useHandleError';
-import { useLoading } from '@/hooks/useUIManage';
+import { useLoading } from '@/components/custom/LoadingContext';
 import { ApiService } from '@/utils/api-service';
 import React, { useEffect, useState } from 'react';
 

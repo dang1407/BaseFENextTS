@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import adm_user from "@/entities/adm_user";
+import adm_user from "@/entities/admin/adm_user";
 import { ApiService } from "@/utils/api-service";
 import { useHandleError } from "@/hooks/useHandleError";
-import { adm_userDTO } from "@/dtos/am_userDTO";
+import { adm_userDTO, adm_userFilter } from '@/dtos/adminitrations/am_userDTO';
 import ApiUrl from "@/constants/ApiUrl";
 import { PageTitle } from '@/components/custom/PageTitle';
 // import { DateTimePicker } from '@/components/custom/DatePicker';

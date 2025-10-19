@@ -1,5 +1,5 @@
-import adm_user from "@/entities/adm_user";
-import { BaseDTO } from "./BaseDTO";
+import adm_user from "@/entities/admin/adm_user";
+import { BaseDTO } from '@/dtos/BaseDTO';
 
 class adm_userDTO extends BaseDTO {
   public adm_userId?: number;

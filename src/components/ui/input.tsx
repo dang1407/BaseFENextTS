@@ -7,7 +7,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>{
   onEnter?: () => void;
   required?: boolean;
   title?: string;
-  value?: string | number | readonly string[] | undefined;
+  value?: string | number | undefined;
 }
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, value, onChange, onEnter, required, title, ...props }, ref) => {

@@ -1,40 +1,48 @@
 "use client";
-import Loading from '@/components/custom/Loading';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import ApiUrl from '@/constants/ApiUrl';
 import { ApiActionCode } from '@/constants/SharedResources';
-import { adm_userDTO, adm_userFilter } from '@/dtos/am_userDTO';
+import { adm_userDTO, adm_userFilter } from '@/dtos/adminitrations/am_userDTO';
 import { PagingInfo } from '@/dtos/BaseDTO';
-import adm_user from '@/entities/adm_user';
+import adm_user from '@/entities/admin/adm_user';
 import { useHandleError } from '@/hooks/useHandleError';
-import { useLoading } from '@/hooks/useUIManage';
+import { useLoading } from '@/components/custom/LoadingContext';
 import { ApiService } from '@/utils/api-service';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useMutation } from '@tanstack/react-query';
+import Utility from '@/utils/utility';
 export default function EmployeeList() {
   const [users, setUsers] = useState<adm_user[]>([]);
   const [filter, setFilter] = useState<adm_userFilter>({});
   const [pagingInfo, setPagingInfo] = useState<PagingInfo>(new PagingInfo());
-  const { isLoading, showLoading, hideLoading } = useLoading();
+  const { showLoading, hideLoading } = useLoading();
   const handleError = useHandleError();
   const router = useRouter();
   const pathname = usePathname();
+
+  // Queries
+  const { mutate: searchUsers, isPending } = useMutation({
+    mutationFn: async (pagingInfo?: PagingInfo) => getUsers(pagingInfo),
+    onSuccess: () => { },
+    onError: handleError,
+  });
   async function getUsers(pagingInfo?: PagingInfo) {
     try {
       showLoading();
       const request = new adm_userDTO();
       request.Filter = filter;
       request.PagingInfo = pagingInfo ?? new PagingInfo();
-      request.PagingInfo.PageSize=100;
       const res = await ApiService.post<adm_userDTO>(
         ApiUrl.User,
         ApiActionCode.SearchData,
         request
       );
-      setUsers(res.adm_users ?? []);
+      setUsers(Utility.AppendSearchResult(users, res.adm_users ?? [], "user_id"));
+      setPagingInfo(res.PagingInfo ?? new PagingInfo());
     } catch (error: any) {
       handleError(error);
     } finally {
@@ -48,17 +56,11 @@ export default function EmployeeList() {
     await getUsers(nextPage);
   }
   useEffect(() => {
-
-    getUsers();
+    searchUsers(undefined);
   }, []);
 
   return (
     <div>
-      {
-        isLoading &&
-        <Loading />
-      }
-      {
         <div className='px-4'>
           <div className='w-full grid grid-cols-3 gap-4 mb-4'>
             <div>
@@ -73,8 +75,8 @@ export default function EmployeeList() {
             </div>
             <div></div>
             <div className='flex gap-2'>
-            <Button onClick={() => getUsers()}>Tìm kiếm</Button>
-              <Button onClick={() => router.push(`${pathname}/create`)}>Thêm mới</Button>
+            <Button onClick={() => searchUsers(pagingInfo)}>Tìm kiếm</Button>
+              <Button onClick={() => router.push(`${pathname}/add`)}>Thêm mới</Button>
             </div>
             <div>
             </div>
@@ -113,10 +115,11 @@ export default function EmployeeList() {
               }
               </TableBody>
             }
-
           </Table>
+          <div className='flex justify-center mt-2'>
+            <Button onClick={() => loadMore()}>Tải thêm</Button>
+          </div>
         </div>
-      }
     </div>
   )
 }

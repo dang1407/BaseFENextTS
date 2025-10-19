@@ -5,6 +5,7 @@ export default class ApiUrl {
   public static ReLogin : string = BASE_URL +  "Authenticate/refresh-token";
   public static SignUp : string = BASE_URL +  "Authenticate/sign-up";
   public static User : string = BASE_URL +  "User";
+  public static Role : string = BASE_URL +  "Role";
   public static UserTest : string = BASE_URL +  "User/Test";
   public static GetUserMenu : string = BASE_URL + "UI/UserMenu";
 }

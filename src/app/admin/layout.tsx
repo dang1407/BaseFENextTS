@@ -1,4 +1,6 @@
+"use client"
 import { LeftMenu } from '@/components/custom/LeftMenu'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React from 'react'
 
 export default function AdminRootLayout({
@@ -7,12 +9,15 @@ export default function AdminRootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className='flex min-h-screen w-100'>
-      <LeftMenu />
-      <div className='flex-1 p-4'>
-        {children}
+    <QueryClientProvider client={new QueryClient()}>
+
+      <div className='flex min-h-screen w-100'>
+        <LeftMenu />
+        <div className='flex-1 p-4'>
+          {children}
+        </div>
       </div>
-    </div>
+    </QueryClientProvider>
   )
 }
 

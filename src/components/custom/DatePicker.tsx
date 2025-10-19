@@ -64,6 +64,8 @@ export function DateTimePicker({ value, onChange, mode = "date" }: DateTimePicke
     const parsed = parse(val, "dd/MM/yyyy", new Date())
     if (!isNaN(parsed.getTime())) {
       handleSelect(parsed)
+      if(onChange)
+      onChange(parsed)
     }
   }
 
