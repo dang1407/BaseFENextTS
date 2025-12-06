@@ -67,6 +67,7 @@ export default function LoginForm() {
                       UserName: e.target.value,
                     })
                   }
+                  onEnter={() => loginHandler()}
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
@@ -82,6 +83,7 @@ export default function LoginForm() {
                       Password: e.target.value,
                     })
                   }
+                  onEnter={() => loginHandler()}
                 />
               </div>
             </div>

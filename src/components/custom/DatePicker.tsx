@@ -14,14 +14,15 @@ type Mode = "date" | "datetime"
 interface DateTimePickerProps {
   value?: Date
   onChange?: (date: Date | undefined) => void
-  mode?: Mode
+  mode?: Mode;
+  dateFormat?: string;
 }
 
-export function DateTimePicker({ value, onChange, mode = "date" }: DateTimePickerProps) {
+export function DateTimePicker({ value, onChange, mode = "date", dateFormat = "dd/MM/yyyy" }: DateTimePickerProps) {
   const [open, setOpen] = React.useState(false)
   const [date, setDate] = React.useState<Date | undefined>(value)
   const [inputValue, setInputValue] = React.useState(
-    value ? format(value, mode === "date" ? "dd/MM/yyyy" : "dd/MM/yyyy HH:mm") : ""
+    value ? format(value, dateFormat) : ""
   )
   const [time, setTime] = React.useState(value ? format(value, "HH:mm") : "00:00")
 
@@ -29,7 +30,7 @@ export function DateTimePicker({ value, onChange, mode = "date" }: DateTimePicke
   React.useEffect(() => {
     if (value) {
       setDate(value)
-      setInputValue(format(value, mode === "date" ? "dd/MM/yyyy" : "dd/MM/yyyy HH:mm"))
+      setInputValue(format(value, dateFormat))
       setTime(format(value, "HH:mm"))
     } else {
       setDate(undefined)
@@ -53,7 +54,7 @@ export function DateTimePicker({ value, onChange, mode = "date" }: DateTimePicke
       newDate.setHours(Number(h), Number(m))
     }
     setDate(newDate)
-    setInputValue(format(newDate, mode === "date" ? "dd/MM/yyyy" : "dd/MM/yyyy HH:mm"))
+    setInputValue(format(newDate, dateFormat))
     onChange?.(newDate)
   }
 
@@ -61,11 +62,9 @@ export function DateTimePicker({ value, onChange, mode = "date" }: DateTimePicke
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value
     setInputValue(val)
-    const parsed = parse(val, "dd/MM/yyyy", new Date())
+    const parsed = parse(val, dateFormat, new Date())
     if (!isNaN(parsed.getTime())) {
       handleSelect(parsed)
-      if(onChange)
-      onChange(parsed)
     }
   }
 
