@@ -89,26 +89,31 @@ export function LeftMenu() {
           ))}
         </div>
 
-        {/* Panel hiển thị menu con khi click */}
-        {activeParent && (
-          <div className="bg-white shadow-md w-60 p-4">
-            <h3 className="font-semibold mb-2">
-              {parentItems.find((p) => p.feature_id === activeParent)?.name}
-            </h3>
-            <div className="flex flex-col space-y-2">
-              {childItemsByParent[activeParent]?.map((child) => (
-                <Button
-                  key={child.feature_id}
-                  variant="ghost"
-                  className="justify-start"
-                  onClick={() => router.push(child.url ?? '')}
-                >
-                  {child.name}
-                </Button>
-              ))}
+        {/* Panel hiển thị menu con khi click với animation */}
+        <div
+          className={`bg-white shadow-md overflow-hidden transition-all duration-300 ease-in-out ${activeParent ? 'w-60 opacity-100' : 'w-0 opacity-0'
+            }`}
+        >
+          {activeParent && (
+            <div className="p-4 animate-slideIn">
+              <h3 className="font-semibold mb-2">
+                {parentItems.find((p) => p.feature_id === activeParent)?.name}
+              </h3>
+              <div className="flex flex-col space-y-2">
+                {childItemsByParent[activeParent]?.map((child) => (
+                  <Button
+                    key={child.feature_id}
+                    variant="ghost"
+                    className="justify-start hover:bg-gray-100 transition-colors"
+                    onClick={() => router.push(child.url ?? '')}
+                  >
+                    {child.name}
+                  </Button>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </TooltipProvider>
     </div>
   );
