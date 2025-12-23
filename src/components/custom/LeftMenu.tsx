@@ -10,12 +10,14 @@ import { useHandleError } from "@/hooks/useHandleError";
 import { ApiService } from "@/utils/api-service";
 import LocalStorageService from "@/utils/LocalStorageService";
 import { MenuIcon } from '@/components/custom/MenuIcon';
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+
 export function LeftMenu() {
   const [featureData, setFeatureData] = useState<adm_feature[]>([]);
   const [activeParent, setActiveParent] = useState<number | null>(null);
   const errorHandler = useHandleError();
   const router = useRouter();
+  const pathname = usePathname();
   useEffect(() => {
     const getUserMenu = async () => {
       try {
@@ -68,12 +70,13 @@ export function LeftMenu() {
       <TooltipProvider>
         {/* Cột icon bên trái */}
         <div className="flex flex-col items-center space-y-2 p-2 bg-gray-100 w-16">
-          {parentItems.map((parent) => (
-            <Tooltip key={parent.feature_id}>
+          {parentItems.map((parent) => {
+            const isMenuIconActive = childItemsByParent[parent.feature_id ?? 0]?.some((child) => child.url === pathname);
+            return <Tooltip key={parent.feature_id}>
               <TooltipTrigger asChild>
                 <Button
                   variant={activeParent === parent.feature_id ? "secondary" : "ghost"}
-                  className="w-12 h-12 p-0 flex items-center justify-center"
+                  className={`w-12 h-12 p-0 flex items-center justify-center ${isMenuIconActive ? "bg-gray-300" : ""}`}
                   onClick={() =>
                     setActiveParent(
                       (activeParent === parent.feature_id) ? null : (parent.feature_id ?? 0)
@@ -86,7 +89,7 @@ export function LeftMenu() {
               </TooltipTrigger>
               <TooltipContent side="right">{parent.name}</TooltipContent>
             </Tooltip>
-          ))}
+          })}
         </div>
 
         {/* Panel hiển thị menu con khi click với animation */}
@@ -100,16 +103,18 @@ export function LeftMenu() {
                 {parentItems.find((p) => p.feature_id === activeParent)?.name}
               </h3>
               <div className="flex flex-col space-y-2">
-                {childItemsByParent[activeParent]?.map((child) => (
-                  <Button
+                {childItemsByParent[activeParent]?.map((child) => {
+                  const isActive = pathname === child.url;
+                  return <Button
                     key={child.feature_id}
                     variant="ghost"
-                    className="justify-start hover:bg-gray-100 transition-colors"
+                    className={`justify-start hover:bg-green-600 hover:text-white transition-colors ${isActive ? 'bg-green-600 text-white' : ''}`}
+
                     onClick={() => router.push(child.url ?? '')}
                   >
                     {child.name}
                   </Button>
-                ))}
+                })}
               </div>
             </div>
           )}

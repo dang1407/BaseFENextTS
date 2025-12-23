@@ -97,7 +97,7 @@ export default function RoleList() {
 
   return (
     <div className='min-h-screen bg-gray-50'>
-      <div className='max-w-7xl mx-auto'>
+      <div className='max-w-7xl'>
         <div className='bg-white rounded-lg shadow-sm'>
           {/* Header */}
           <div className='mb-6'>

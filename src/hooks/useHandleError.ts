@@ -67,7 +67,10 @@ export const useHandleError = () => {
         });
         break;
       default:
-        // message = `Error: ${message}`;
+        toast({
+          title: "Lỗi",
+          description: message
+        });
     }
   
     // console.error("API Error:", {
