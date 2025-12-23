@@ -8,7 +8,7 @@ export default class ApiUrl {
   public static Role: string = BASE_URL + "Role";
   public static UserTest: string = BASE_URL + "User/Test";
   public static GetUserMenu: string = BASE_URL + "UI/UserMenu";
-
+  public static Right: string = BASE_URL + "Right";
   // Booking & CarTrip endpoints
   public static Booking: string = BASE_URL + "Booking";
   public static CarTrip: string = BASE_URL + "CarTrip";

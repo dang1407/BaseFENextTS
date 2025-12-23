@@ -1,9 +1,10 @@
 class ApiActionCode {
-  static SearchData : string = "SearchData"; 
+  static SearchData: string = "SearchData";
   static UpdateItem: string = "UpdateItem";
   static AddNewItem: string = "AddNewItem";
   static SetupDisplay: string = "SetupDisplay";
   static SetupUpdateForm: string = "SetupUpdateForm";
+  static SetupViewForm: string = "SetupViewForm";
 }
 
 class SharedResource {
@@ -22,4 +23,4 @@ class SharedResource {
 export type FormModeValue = (typeof SharedResource.FormMode)[keyof typeof SharedResource.FormMode];
 export type SaveModeValue = (typeof SharedResource.SaveMode)[keyof typeof SharedResource.SaveMode];
 
-export {ApiActionCode, SharedResource};
+export { ApiActionCode, SharedResource };
